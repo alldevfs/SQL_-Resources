@@ -1,0 +1,73 @@
+# Capítulo 1: Criação de Banco de Dados(SQL Server management Studio)
+
++ Tópico 1: SQL Server
+- SSMS é um ambiente de desenvolvimento integrado que utilisa para: acessar, configurar gerenciar e desenvolver componentes do SQL Server.
+
+- BD é um conjunto de informações organizadas e relacionadas, ou não.
++ Tópico 2: Criação de tabelas
+	. Comandos SQL
+CREATE DATABASE 'nome_banco' -> para criar um banco de dados.
+USE 			'nome_banco' -> para escolher e acessar o banco.
+DROP   DATABASE	'nome_banco' -> para apagar um banco e concequentemente suas respectivas tabelas.
+GO				'nome_banco' -> par sinalizar o final de alguma instrução.
+    . Criação de um banco de dados
+		- Arquivo de dados e Log de dados:
+			CREATE DATABASE 'nome_banco'
+			ON
+				(NAME = 'nome_banco',
+				 FILEMANE = 'C:\caminho_do_arquivo\nome_banco.mdf',
+				 SIZE = 10, 	--tamanho inicial
+				 MAXSIZE = 50,	--tamanho máximo
+				 FILEGROWTH 5)	--incremento de crescimento(5 em 5)
+			LOG ON
+				(NAME = 'nome_log',
+				FILENAME = 'C:\caminho_do_arquivo\nome_banco.ldf',
+				SIZE = 5MB,
+				MAXSIZE = 25MB,
+				FILEGROWTH = 5);
+				GO
+		--		(NAME = 'nome_banco',
+				 FILEMANE   --caminho do arquivo e nome do arquivo.
+				 SIZE   	--tamanho inicial.
+				 MAXSIZE	--tamanho máximo.
+				 FILEGROWTH	--incremento de crescimento(5 em 5).
+
+    . Criação de tabelas usando o SSMS e o T-SQL.
+    	- Atributo/campo é a menor unidade de armazenamento, considerada também como local onde se armazena dados.
+    	- Registro é o conjunto de campos/atributos que estão relacionadas a um determinado tema.
+    	- Chave-primária(PK) é o campo ou conjunto de campos que identifica de forma única cada registro da tabela.
+    	- Chave-Estrangeira(FK) é a coluna ou conbinação de colunas usada para relacionar duas tabelas.
+    	- Tabela/relação é o conjunto de registros.
+    	- Banco de dados é o conjunto de tabelas/relação.
+
+    	- Criando uma tabela.
+    		CREATE TABLE 'nome_tabela'
+    		'nome_coluna' <tipo de dado> <restrições/Constrains>,
+    		'nome_coluna' <tipo de dado> <restrições/Constrains>
+    		);
+    		<tipo de dado>  		-> Seria o tpo de dado que o campo irá receber, ex: VARCHAR, INTEGER, TEXT..
+    		<Restrições/Constrains> -> Seriam as regras de integridade e consistência de cada coluna ex: AUTO_INCREMENT, UNIQUE, PRIMARY KEY, NOT NULL..
+
+    		NomeDaTabela – poderá conter até 128 caracteres e deverá ser escolhido de forma que clara, coerente com o conteúdo que será inserido, visto que é o local onde os dados serão adicionados.
+
+			NomeDaColuna – nome de identificação da coluna da tabela, que deve ser único (diferente de outro na mesma tabela).
+
+			TipoDeDados – identificação do tipo de dado que o campo deverá conter: VarChar, Char, Int, podendo permitir Null, Not Null.
+
+			Restrições – definição de restrições a serem implementadas no banco de dados tais como: Primary Key, Unique, Clustered/NonClustered e Foreign Key References.
+
+# Capítulo 2: Relacionamento entre Tabelas
+
++ Tópico 1: Relacionamento usando SSMS
+
+	- Nenhum campo que possui chave primária ou chave estrangeira deve permitir valores nulos, sempre usar NOT NULL pra casos assim.
+
+	- Para relacionar duas tabelas é necessário a primeira tabela possuir uma PRIMARY KEY que coincida com a FOREIGN KEY da segunda tabela.
+
++ Tópico 2: Comandos
+	- PAGINA 10
++ Tópico 3: Operadores
+# Capítulo 3: Funções e Procedimentos
+
++ Tópico 1: Funções
++ Tópico 2: Store Procedures, Views e Triggers
