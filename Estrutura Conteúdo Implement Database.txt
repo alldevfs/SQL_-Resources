@@ -65,9 +65,86 @@ GO				'nome_banco' -> par sinalizar o final de alguma instrução.
 	- Para relacionar duas tabelas é necessário a primeira tabela possuir uma PRIMARY KEY que coincida com a FOREIGN KEY da segunda tabela.
 
 + Tópico 2: Comandos
-	- PAGINA 10
-+ Tópico 3: Operadores
-# Capítulo 3: Funções e Procedimentos
+	INSERT INTO 'none_tabela'
+	(coluna1, 'nome_coluna1', 'nome_coluna2')
+	VALUES
+	('valor1', 'valor_coluna1' ,'valor_coluna2');
+	- INSERT INTO -> início do comando de inserção de dados.
+	- 'nome_tabela'(coluna1, 'nome_coluna1', 'nome_coluna2') -> campos que deverão ser preenchidos com os dados respectivamente que os campos se encontram.
+	- VALUES('valor1', 'valor_coluna1' ,'valor_coluna2'); -> primeiro indica que os valores a seguir serão inseridos e depois passa os valores separados por virgula.(Usando ''(aspas) quando usar texto/letras para inserir dados.).
 
+	SELECT coluna1, 'nome_coluna1', 'nome_coluna2' FROM 'nome_tabela';
+	ou caso queira selecionar tudo da tabela podes usar o asterísco *.
+	SELECT * FROM 'nome_tabela';
+	- SELECT -> cláusula usada para selecionar dados em uma tabela.
+
+	SELECT * FROM 'nome_tabela' WHERE <condição>;
+	- WHERE -> cláusula usada para limita os resultados e exibir somente as linhas compatíveis com a condição estabelecida, ex: SELECT * FROM 'nome_tabela' WHERE 'coluna_cargo' = 'Analísta';
+
+	UPDATE 'nome_tabela' SET 'nome_coluna' = 'novo_nome_coluna'	WHERE 'nome_coluna' = 'Analísta';
+	- UPDATE -> inicio do comando usado para realizar alterações na estrutura da tabela.
+	- SET    -> cláusula usada para setar qual colula daquela tabela receberar um novo nome/formato.
+	- WHERE  -> cláusula usada para limitar resultados, exibindo apenas os mesmo que coinsidem com a condição.
+
+	DELETE FROM 'nome_tabela' WHERE = 'nome_coluna' = 'Analísta';
+	- DELETE -> início do comando usado para deletar valores de uma tabela.
+	- FROM   -> cláusula usada para referenciar uma tabela.
+	- WHERE  -> cláusula usada para limitar o que será deletado, ou seja, será apagado tudo da tabela 'nome_tabela' que coincidir com a condição da cláusula WHERE.
+
+	SELECT * FROM 'nome_tabela' WHERE salario BETWEEN 2000 AND 3000;
+	- BETWEEN -> cláusula usada para referenciar valor de quaquer coluna que for usada depois da cláusula WHERE e representa uma dupla condição que verifica se o valor de uma condição se encontra 'ENTRE' um valor  'E' outro valor.
+
+	SELECT * FROM 'nome_tabela' WHERE 'nome_pessoa' LIKE '%Allan%';
+	- LIKE -> cláusula usada depois da cláusula WHERE como um limitador de resultados, que são comparados com o valor depois da cláusula LIKE.
+	 '%texto' -> usada para buscar/retornar qualquer valor que termine com a palavra nome.
+	 'nome%'  -> usada para buscar/retornar qualquer valor que inicie  com a palavra nome.
+	 '%nome%' -> usada para buscar/retornar qualquer valor que possua  a palavra nome.
+
+	 SELECT * FROM 'nome_tabela' WHERE 'nome_area_atuacao' IN ('Analista', 'Analista de Banco de Dados', 'Desenvolvedor');
+	 - IN -> cláusula usada para retornar dados de uma consulta, como a cláusula LIKE, porém usará como limitador uma lista de valores para serem comparados na condição após a cláusula WHERE.
+
+	 SELECT * FROM 'nome_tabela' WHERE 'nome_area_atuacao' NOT IN ('Supervisor', 'Consultor Técnico', 'Gestor');
+	 -> NOT IN cláusula usada para retornar dados de uma consulta, como a cláusula IN, porém usará como limitador uma lista de valores para serem comparados na condição após a cláusula WHERE e que não constem qualquer valor que esteja inserido nesta lista.
+
++ Tópico 3: Operadores
+	- Operadores relacionais
+
+		USE 'nome_banco' GO;
+		SELECT * FROM 'nome_tabela' WHERE 'campo_idade' <= 26;
+		(Esta consulta ira retornar todos as pessoas registradas no banco que possuam até 26 anos)
+		=  -> Igual a
+		>  -> Maior que
+		<  -> Menor que
+		>= -> Maior ou igual a
+		<= -> Menor ou igual a
+		<> -> Diferene de
+
+	- Operadores aritméticos
+			
+		SELECT 'nome_produto', 'preco_produto', 'quantidade_produto', 'quantitade_produto', (preco_produto - quantidade_produto) AS total FROM 'nome_tabela' WHERE total >= 2050;
+		(Esta consulta ira retornar todos os produtos, com seus preços, sua quantidade, preço e total(coluna extra criada para receber valor do calculo) que possuam total de lucro de todas as vendas de cada produto acima ou igual a 2050 registradas no banco)
+		+ -> usado para somar valores numéricos em uma consulta.
+		- -> usado para retornar a diferença entre dois valores numéricos em uma consulta.
+		* -> usado para multiplicar dois valores numéricos em uma consulta.
+		/ -> usado para retornar o quociente de uma divisão dentre dois valores numéricos em uma consulta.
+		% -> usado para retornar o resto de uma divisão dentre dois valores numéricos em uma consulta.
+		- Operadores de concatenação
+		SELECT ('coluna_primeiro_nome' + 'coluna_segundo_nome') AS Nomes FROM 'nome_tabela';
+		(Esta consulta irá juntar a primeira coluna e a segunda coluna e retornar as duas em apenas uma coluna os dois valores, porém sem espassamento entre elas.)
+		SELECT ('coluna_primeiro_nome' + ' ' + 'coluna_segundo_nome') AS Nomes FROM 'nome_tabela';
+		(Agora esta consulta irá retornar a junção das tuas colunas com um espassamento entre elas pois foi passado também um espaço, por parâmetro, entre as duas colunas.)
+
+# Capítulo 3: Funções e Procedimentos
+	
 + Tópico 1: Funções
+	- Funções de conversão
+		SELECT CONVERT(VARCHAR, 'nome_coluna') FROM 'nome_tabela';
+		SELECT CAST('nome_coluna' AS VARCHAR) FROM 'nome_tabela';
+		
+		CAST 	-> é padrão ANSI podendo ser usado para converter dados em qualquer banco de dados.
+		CONVERT -> é uma função T-SQL podendo ser usada apenas converter dados especificamente do Microsoft SQL SERVER.
+
+	- Funções matemáticas
+	- Funções de data
+	- Funções agregadas
 + Tópico 2: Store Procedures, Views e Triggers
