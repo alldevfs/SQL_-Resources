@@ -140,11 +140,59 @@ GO				'nome_banco' -> par sinalizar o final de alguma instrução.
 	- Funções de conversão
 		SELECT CONVERT(VARCHAR, 'nome_coluna') FROM 'nome_tabela';
 		SELECT CAST('nome_coluna' AS VARCHAR) FROM 'nome_tabela';
-		
+
 		CAST 	-> é padrão ANSI podendo ser usado para converter dados em qualquer banco de dados.
 		CONVERT -> é uma função T-SQL podendo ser usada apenas converter dados especificamente do Microsoft SQL SERVER.
 
 	- Funções matemáticas
+		SELECT ABS('nome_coluna')   FROM 'nome_tabela';
+		SELECT FLOOR('nome_coluna') FROM 'nome_tabela';
+		SELECT ROUND('nome_coluna', 'numero de casas') FROM 'nome_tabela';
+
+		ABS   -> retorna um valor absoluto em uma expressão.
+		FLOOR -> retorna um valor arredondado ou para menor ou para maior que o definido.
+		ROUND -> retornar um valor arredondado para um certo número de casas decimais.
+	- Funções de String
+		SELECT UPPER('nome_coluna') 	FROM 'nome_tabela';
+		SELECT LOWER('nome_coluna') 	FROM 'nome_tabela';
+		SELECT LTRIM('nome_coluna') 	FROM 'nome_tabela';
+		SELECT RTRIM('nome_coluna') 	FROM 'nome_tabela';
+		SELECT LEFT('nome_coluna', 3) 	FROM 'nome_tabela';
+		SELECT RIGHT('nome_coluna', 3) 	FROM 'nome_tabela';
+		SELECT REVERSE('nome_coluna') 	FROM 'nome_tabela';
+		SELECT LEN('nome_coluna') 		FROM 'nome_tabela';
+		SELECT SUBSTRING('nome_coluna',1, 5) FROM 'nome_tabela';
+		SELECT CHARINDEX('nome_coluna') FROM 'nome_tabela';
+		
+		UPPER 	  -> converte caracteres em maiúsculos.
+		LOWER 	  -> converte caracteres em minúsculos.
+		LTRIM 	  -> remove espaçamento antes da expressão dos caracteres.
+		RTRIM 	  -> remove espaçamento depois da expressão dos caracteres.
+		LEFT  	  -> retorna a quantidade de caracteres de uma expressão a partir da esquerda para direita.
+		RIGHT 	  -> retorna a quantidade de caracteres de uma expressão a partir da direita para esquerda.
+		REVERSE   -> retorna o inverso de caracteres de uma expressão.
+		LEN 	  -> retorna a quantidade de caracteres de uma string(remove os espaços em branco após os dados)
+		SUBSTRING -> extrai dados de caracteres de um conjunto de textos. 
+		CHARINDEX -> retorna a posição de um caractere em um texto.
+
 	- Funções de data
+		SELECT GETDATE();
+			-> retorna a data e a hora atual.
+		SELECT DAY('valor_data');
+			-> extrai e retorna o dia de uma data específica.
+		SELECT MONTH('valor_data');
+			-> extrai e retorna o mês de uma data específica.
+		SELECT YEAR('valor_data');
+			-> extrai e retorna o ano de uma data específica.
+
+		SELECT DATEPART('day,month,year,week,...', GETDATE());
+			-> extrai parte de uma data especifica, como dia, mês ou ano.
+		SELECT DATEADD('day,month,year,week,...', 'numero', 'valor_data');
+			-> retorna uma data após o acréscimo de tempo ou intervalo à data especificada.
+		SELECT DATEDIFF('day,month,year,week,...', 'data1', 'data2');
+			-> retorna a diferença entre duas datas.
+		SELECT DATENAME('day,month,year,week,...', 'valor_data');
+			-> Extrai parte de uma data como um valor de string.
+			
 	- Funções agregadas
 + Tópico 2: Store Procedures, Views e Triggers
