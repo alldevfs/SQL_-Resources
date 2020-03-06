@@ -195,4 +195,67 @@ GO				'nome_banco' -> par sinalizar o final de alguma instrução.
 			-> Extrai parte de uma data como um valor de string.
 			
 	- Funções agregadas
+		Funções agregadas recuperar um valor numérico de uma linha ou grupo de linhas em uma tabela, sendo assim também camadas de funções determinístas.
+
+		SELECT AVG('nome_coluna') FROM 'nome_tabela';
+			Retorna a média de todos os valores de uma expressão em uma tabela OU GRUPO DE LINHAS.
+			(Função usada somente em colunas numéricas e ignora valroes null)
+
+		SELECT MAX('nome_coluna') FROM 'nome_tabela';
+			Retorna o valor máximo de uma expressão(registro com o maior valor).
+
+		SELECT MIN('nome_coluna') FROM 'nome_tabela';
+			Retorna o valor mínimo de uma expressão(registro com menor valor).
+			
+		SELECT SUM('nome_coluna') FROM 'nome_tabela';
+			Retorna a soma de todos os valores de uma expressão(soma de valores de todos os registros).
+
+		SELECT COUNT('nome_coluna') FROM 'nome_tabela';
+			Retorna o total de registros/linhas.
+
+	- Instruções de Ordenação e Agregadas
+
+		SELECT 'nome_usuario' FROM 'tabela_funcionarios' ORDER BY ASC/DESC;
+			retorna os registros em ordem crescente ou decrescente respectivamente.
+
+		SELECT 'nome_usuario', SUM('valor_credito') AS Total FROM 'tabela_funcionarios' GROUP BY 'nome_usuario';
+			retorna todos os registros agrupados por seus nomes, ou seja, agrupa um conjunto de linhas selecionadas.
+
+		SELECT 'nome_usuario', SUM('valor_credito') AS Total FROM 'tabela_funcionarios' GROUP BY 'nome_usuario' HAVING 'valor_credito' >=23;
+			usado em conjunto com a cláusula GROUP BY como um segundo filtro de busca de registro, no qual será baseada após o agrupamento.
+
+		SELECT A.'coluna_A', B.'coluna_B' FROM 'coluna_A' AS A JOIN 'coluna_B' AS B ON A.'coluna_A' = B.'coluna_B';
+			usado para relacionar duas ou mais tabelas, porém é necessário usar como ligação alguma coluna ou conjunto de colunas para que possam se relacionar como exemplo as PK e FK(Primary Key e Foreign Key).
+
+		SELECT A.'coluna_A', B.'coluna_B' FROM 'coluna_A' AS A LEFT JOIN 'coluna_B' AS B ON A.'coluna_A' = B.'coluna_B';
+			usado para pegar todas as linhas da tabela esquerda e comparar com as da direita, podendo retornar campos preenchidos da esquerda e campos nulls na direita, pois a tabela da esquerda é usada como referencia para relacionar registros.
+
+		SELECT A.'coluna_A', B.'coluna_B' FROM 'coluna_A' AS A RIGHT JOIN 'coluna_B' AS B ON A.'coluna_A' = B.'coluna_B';
+			usado para pegar todas as linhas da tabela direita e comparar com as da esquerda, podendo retornar campos preenchidos da direita e campos nulls na esquerda, pois a tabela da direita é usada como referencia para relacionar registros.
+
+		SELECT * FROM 'nome_tabela1'
+		UNION/UNION ALL
+		SELECT * FROM 'nome_tabela2';
+			usado para combinar duas consultas em apenas um se asemelhando com o JOIN, porém as cada tabela deve possuir colunas com o mesmo tipo de dados que as outras, além de não retornar registros repetidos. Caso queira retornar valores repetidos utilizar da cláusula UNION ALL.
+
 + Tópico 2: Store Procedures, Views e Triggers
+	- Stored Procedure(procedimento armazenado)
+		São tarefas repetitivas que podem aceitar parâmetros de entrada, essas taferas são armazenadas no servidor já precompiladas a espera do usuário solicitar sua execução.
+
+		CREATE PROCEDURE funcCadastro
+		@nome VARCHAR(30),
+		@cargo VARCHAR(35)
+		AS
+		INSERT INTO 'nome_tabela' VALUES (@nome, @cargo);
+
+		EXEC funcCadastro 'Allan', 'Administrador de Banco de Dados';
+
+	- Views
+		são um meio alternativo de retorno de dados de uma ou mais tabelas podendo ser considerada uma tabela virtual ou consulta armazenada. Uma VIEW utiliza da cláusula SELECT para buscar os dados para uma tabela virtual ou armazenada em cache. Com a VIEW é possível restringir acessos indevidos de usuários específicos.
+
+		
+
+
+
+
+	- Triggers
